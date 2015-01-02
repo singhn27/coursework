@@ -25,16 +25,16 @@ mainGame m = do
     i <- getInt
     case (isAllowedMove m i) of
         True -> do
-            putStrLn ("Next player, please select a pit to move from.")    
+            putStrLn ("\nNext player, please select a pit to move from.\n")    
             mainGame (move m i)
         False -> case (gameOver m) of
             True -> do
                 case (winners m) of
-                    [] -> putStrLn "Draw"
-                    [a] -> putStrLn ("Winner is " ++ (show a))
-                putStrLn "Game over."
+                    [] -> putStrLn "\nDraw\n"
+                    [a] -> putStrLn ("\nWinner is " ++ (show a) ++ "\n")
+                putStrLn "\nGame over.\n"
             False -> do
-                putStrLn "False move. Try again."
+                putStrLn "\nFalse move. Try again.\n"
                 mainGame m
 
 move :: MancalaBoard -> Int -> MancalaBoard
@@ -157,12 +157,12 @@ gameOver m = (allowedMoves m (getCurPlayer m)) == []
 
 instance Show MancalaBoard where
     show (MancalaBoardImpl boardData player) =
-            "         | 6   5   4   3   2   1   0   |\n" ++ 
+            "         |   6   5   4   3   2   1   0   |\n" ++ 
             "----------------------------------------\n" ++
-            "Player B | " ++ (printf "\x1b[32m%-4d\x1b[0m%-4d%-4d%-4d%-4d%-4d%-4d|\n" b1 b2 b3 b4 b5 b6 b7) ++ 
-            "Player A | " ++ (printf "%-4d%-4d%-4d%-4d%-4d%-4d\x1b[32m%-4d\x1b[0m|\n" a1 a2 a3 a4 a5 a6 a7) ++
+            "Player B |   " ++ (printf "\x1b[32m%-4d\x1b[0m%-4d%-4d%-4d%-4d%-4d%-4d|\n" b1 b2 b3 b4 b5 b6 b7) ++ 
+            "Player A |   " ++ (printf "%-4d%-4d%-4d%-4d%-4d%-4d\x1b[32m%-4d\x1b[0m|\n" a1 a2 a3 a4 a5 a6 a7) ++
             "----------------------------------------\n" ++
-            "         | 0   1   2   3   4   5   6   |\n" ++             
+            "         |   0   1   2   3   4   5   6   |\n" ++             
             "\nCurrent Player: " ++ (show player) where
             
             [a1, a2, a3, a4, a5, a6, a7] = playerSide (MancalaBoardImpl boardData player) PlayerA
