@@ -85,8 +85,10 @@ nextPlayer p = playerWithNum $ ((playerNum p) + 1) `mod` numPlayers
 ---- Functions/constants for MancalaBoard ----
 
 {- number of pits on each side -}
+boardSize :: Int
 boardSize = 6
 {- number of stones in each pit -}
+startStones :: Int
 startStones = 4
 
 {- the initial mancala board -}
@@ -99,11 +101,9 @@ initial = MancalaBoardImpl (concat $ take numPlayers (repeat boardSide)) PlayerA
 indexForFirstPit :: Player -> Int
 indexForFirstPit p = (playerNum p) * (boardSize + 1)
 
-
 {- return the index of the store for that player -}
 indexForPlayerStore :: Player -> Int
 indexForPlayerStore p = boardSize + (indexForFirstPit p)
-
 
 {- return the indices for the pits (without the store) for a player -}
 indicesForPlayerSide :: Player -> [Int]
