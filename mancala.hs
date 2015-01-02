@@ -1,7 +1,7 @@
 module Mancala where
 
-import Data.List -- for List.elemIndex
-import Data.Maybe -- for List.elemIndex
+import Data.List
+import Data.Maybe
 import Control.Monad
 import Control.Exception
 import System.IO
@@ -9,12 +9,14 @@ import Text.Printf
 
 data MancalaBoard = MancalaBoardImpl [Int] Player
 
-data Player = PlayerA | PlayerB deriving (Eq, Show, Read)
+data Player = PlayerA | PlayerB
+    deriving (Eq, Show, Read)
 
 main :: IO ()
 main = do
     let curPlayer = show $ getCurPlayer initial
-    putStrLn ("Welcome to the Two Player Mancala Game!\n" ++ curPlayer ++ ", select a pit to move from by entering \na number from 0 to 5 to indicate your pit from left to right.")
+    putStrLn ("Welcome to the Two Player Mancala Game!\n" ++ curPlayer ++ 
+    ", select a pit to move from by entering \na number from 0 to 5.")
     mainGame initial
 
 mainGame :: MancalaBoard -> IO ()
@@ -67,7 +69,7 @@ winners m | numCaptured m PlayerA > numCaptured m PlayerB = [PlayerA]
           | numCaptured m PlayerB > numCaptured m PlayerA = [PlayerB]
           | otherwise = []
 
----- Functions/constants for Player ----
+---- Functions/Constants for Player ----
 
 allPlayers = [PlayerA, PlayerB]
 numPlayers = length allPlayers
@@ -78,40 +80,41 @@ playerNum p = fromJust $ elemIndex p allPlayers
 playerWithNum :: Int -> Player
 playerWithNum i = allPlayers !! i
 
+-- Find the player whose turn is next
 nextPlayer :: Player -> Player
-{- Find the player whose turn is next -}
 nextPlayer p = playerWithNum $ ((playerNum p) + 1) `mod` numPlayers
 
----- Functions/constants for MancalaBoard ----
+---- Functions/Constants for MancalaBoard ----
 
-{- number of pits on each side -}
+-- Number of pits on each side
 boardSize :: Int
 boardSize = 6
-{- number of stones in each pit -}
+
+-- Number of stones in each pit
 startStones :: Int
 startStones = 4
 
-{- the initial mancala board -}
+-- The initial mancala board
 initial :: MancalaBoard
 initial = MancalaBoardImpl (concat $ take numPlayers (repeat boardSide)) PlayerA
                         -- One side of board                pit at end
     where boardSide = take boardSize (repeat startStones) ++ [0]
 
-{- return the index of the first pit belonging to a player -}
+-- Return the index of the first pit belonging to a player
 indexForFirstPit :: Player -> Int
 indexForFirstPit p = (playerNum p) * (boardSize + 1)
 
-{- return the index of the store for that player -}
+-- Return the index of the store for that player
 indexForPlayerStore :: Player -> Int
 indexForPlayerStore p = boardSize + (indexForFirstPit p)
 
-{- return the indices for the pits (without the store) for a player -}
+-- return the indices for the pits (without the store) for a player
 indicesForPlayerSide :: Player -> [Int]
 indicesForPlayerSide p = [firstPit .. lastPit] where
     firstPit = indexForFirstPit p
     lastPit = firstPit + boardSize - 1
 
----- Retrieve information about Mancala Board
+---- Retrieve information about MancalaBoard ----
 
 getBoardData :: MancalaBoard -> [Int]
 getBoardData (MancalaBoardImpl b _) = b
