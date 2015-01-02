@@ -108,7 +108,7 @@ indexForFirstPit p = (playerNum p) * (boardSize + 1)
 indexForPlayerStore :: Player -> Int
 indexForPlayerStore p = boardSize + (indexForFirstPit p)
 
--- return the indices for the pits (without the store) for a player
+-- Return the indices for the pits (without the store) for a player
 indicesForPlayerSide :: Player -> [Int]
 indicesForPlayerSide p = [firstPit .. lastPit] where
     firstPit = indexForFirstPit p
