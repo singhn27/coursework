@@ -15,8 +15,8 @@ data Player = PlayerA | PlayerB
 main :: IO ()
 main = do
     let curPlayer = show $ getCurPlayer initial
-    putStrLn ("Welcome to the Two Player Mancala Game!\n\n") 
-    putStrLn (curPlayer ++ "Please select a pit to move from by\nentering a number from 0 to 5.")
+    putStrLn ("\nWelcome to the Two Player Mancala Game!\n") 
+    putStrLn (curPlayer ++ ", please select a pit to move\nfrom by entering a number from 0 to 5.\n")
     mainGame initial
 
 mainGame :: MancalaBoard -> IO ()
@@ -163,7 +163,7 @@ instance Show MancalaBoard where
             "Player A | " ++ (printf "%-4d%-4d%-4d%-4d%-4d%-4d\x1b[32m%-4d\x1b[0m|\n" a1 a2 a3 a4 a5 a6 a7) ++
             "----------------------------------------\n" ++
             "         | 0   1   2   3   4   5   6   |\n" ++             
-            "\n\nCurrent Player: " ++ (show player) where
+            "\nCurrent Player: " ++ (show player) where
             
             [a1, a2, a3, a4, a5, a6, a7] = playerSide (MancalaBoardImpl boardData player) PlayerA
             [b1, b2, b3, b4, b5, b6, b7] = reverse $ playerSide (MancalaBoardImpl boardData player) PlayerB
