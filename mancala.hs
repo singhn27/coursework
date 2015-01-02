@@ -158,10 +158,10 @@ gameOver m = (allowedMoves m (getCurPlayer m)) == []
 instance Show MancalaBoard where
     show (MancalaBoardImpl boardData player) =
             "         |   6   5   4   3   2   1   0   |\n" ++ 
-            "----------------------------------------\n" ++
+            "------------------------------------------\n" ++
             "Player B |   " ++ (printf "\x1b[32m%-4d\x1b[0m%-4d%-4d%-4d%-4d%-4d%-4d|\n" b1 b2 b3 b4 b5 b6 b7) ++ 
             "Player A |   " ++ (printf "%-4d%-4d%-4d%-4d%-4d%-4d\x1b[32m%-4d\x1b[0m|\n" a1 a2 a3 a4 a5 a6 a7) ++
-            "----------------------------------------\n" ++
+            "------------------------------------------\n" ++
             "         |   0   1   2   3   4   5   6   |\n" ++             
             "\nCurrent Player: " ++ (show player) where
             
