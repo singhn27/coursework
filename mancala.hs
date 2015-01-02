@@ -15,8 +15,8 @@ data Player = PlayerA | PlayerB
 main :: IO ()
 main = do
     let curPlayer = show $ getCurPlayer initial
-    putStrLn ("Welcome to the Two Player Mancala Game!\n" ++ curPlayer) 
-    putStrLn ("Please select a pit to move from by entering \na number from 0 to 5.")
+    putStrLn ("Welcome to the Two Player Mancala Game!\n\n") 
+    putStrLn (curPlayer ++ "Please select a pit to move from by\nentering a number from 0 to 5.")
     mainGame initial
 
 mainGame :: MancalaBoard -> IO ()
