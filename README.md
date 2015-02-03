@@ -1,3 +1,4 @@
 # Code Samples
 
-- Mancala (final project for Honors Computer Science I at The University of Chicago)
+- CMSC 16100 (Honors Introduction to Programming I, UofC)
+  - Mancala (game implementation with AI in Haskell, final project)
